@@ -44,22 +44,54 @@ export default function BalanceofCoins() {
     };
 
     return (
-        <TouchableOpacity onPress={goToSolanaAddress} style={styles.container}>
-                <View style={styles.coinRow}>
-                    <View style={styles.coinColumn}>
-                        <Image style={styles.coinImage} source={sol} />
-                        <View style={styles.textContainer}>
-                            <Text style={styles.title}> Solana</Text>
-                            <Text style={styles.subtitle}> SOL</Text>
-                        </View>
-                    </View>
-                    <View style={styles.priceChangeColumn}>
-                        <View style={[styles.tableColumn2]}>
-                            <Text style={[styles.quantityofCoin]}>{balance !== null ? balance : 'Loading...'}</Text>
-                        </View>
+        <><TouchableOpacity onPress={goToBitcoinAddress} style={styles.container}>
+        <Text style={styles.coinstext}>Your Coins:</Text>
+        <View style={styles.coinRow}>
+            <View style={styles.coinColumn}>
+                <Image style={styles.coinImage} source={btc} />
+                <View style={styles.textContainer}>
+                    <Text style={styles.title}> Bitcoin</Text>
+                    <Text style={styles.subtitle}> BTC</Text>
+                </View>
+            </View>
+            <View style={styles.priceChangeColumn}>
+                <View style={[styles.tableColumn2]}>
+                    <Text style={[styles.quantityofCoin]}>{balance !== null ? balance : 'Loading...'}</Text>
+                </View>
+            </View>
+        </View>
+    </TouchableOpacity><TouchableOpacity onPress={goToSolanaAddress} style={styles.container}>
+            <View style={styles.coinRow}>
+                <View style={styles.coinColumn}>
+                    <Image style={styles.coinImage} source={sol} />
+                    <View style={styles.textContainer}>
+                        <Text style={styles.title}> Solana</Text>
+                        <Text style={styles.subtitle}> SOL</Text>
                     </View>
                 </View>
-            </TouchableOpacity>
+                <View style={styles.priceChangeColumn}>
+                    <View style={[styles.tableColumn2]}>
+                        <Text style={[styles.quantityofCoin]}>{balance !== null ? balance : 'Loading...'}</Text>
+                    </View>
+                </View>
+            </View>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={goToDianaAddress} style={styles.container}>
+            <View style={styles.coinRow}>
+                <View style={styles.coinColumn}>
+                    <Image style={styles.coinImage} source={dia} />
+                    <View style={styles.textContainer}>
+                        <Text style={styles.title}> Diana Coin</Text>
+                        <Text style={styles.subtitle}> Diana Coin</Text>
+                    </View>
+                </View>
+                <View style={styles.priceChangeColumn}>
+                    <View style={[styles.tableColumn2]}>
+                        <Text style={[styles.quantityofCoin]}>{balance !== null ? balance : 'Loading...'}</Text>
+                    </View>
+                </View>
+            </View>
+        </TouchableOpacity></>
     );
 }
 

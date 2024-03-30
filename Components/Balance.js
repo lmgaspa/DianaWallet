@@ -27,7 +27,7 @@ export default function Balance() {
     }, [route.params.address]);
 
     const goToSetupPage = () => {
-        navigation.navigate('Config');
+        navigation.navigate('Setup'); // Navega para a página Setup.js
     };
 
     return (

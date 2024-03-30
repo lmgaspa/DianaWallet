@@ -9,12 +9,14 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@expo/vector-icons": "^14.0.0",
     "@react-native-async-storage/async-storage": "^1.23.1",
     "@react-navigation/native": "^6.1.16",
     "@react-navigation/stack": "^6.3.28",
     "@reduxjs/toolkit": "^2.2.1",
     "@solana-mobile/mobile-wallet-adapter-protocol": "^2.1.2",
     "@solana-mobile/mobile-wallet-adapter-protocol-web3js": "^2.1.2",
+    "@solana/spl-token": "^0.4.3",
     "@solana/web3.js": "^1.91.1",
     "@types/react": "~18.2.45",
     "axios": "^1.6.8",
@@ -46,8 +48,7 @@
     "redux": "^5.0.1",
     "text-encoding": "^0.7.0",
     "tweetnacl": "^1.0.3",
-    "typescript": "^5.3.0",
-    "@expo/vector-icons": "^14.0.0"
+    "typescript": "^5.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.24.0",

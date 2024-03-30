@@ -4,12 +4,10 @@ import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-nati
 import { useNavigation } from '@react-navigation/native';
 
 import { useRoute } from '@react-navigation/native';
+import { Connection, PublicKey } from '@solana/web3.js';
+import BackButton from '../Components/BackButton';
 
-export default function BitcoinAddress() {
-    const navigation = useNavigation();
-    const route = useRoute();
-    const [balance, setBalance] = useState(null);
-    const address = route.params.address; 
+export default function BitcoinAddress({ navigation }) {
 
     const handleWithdrawPress = () => {
         navigation.navigate('BitcoinWithdraw', {address});
@@ -19,28 +17,19 @@ export default function BitcoinAddress() {
         navigation.navigate('BitcoinDeposit', {address});
     };
 
+    const handleBackPress = () => {
+        navigation.goBack(); // Função para voltar para a tela anterior
+    };
+
     return (
         <ScrollView style={{ backgroundColor: 'black' }}>
+            <BackButton onPress={handleBackPress}/>
             <View style={styles.container}>
                 <Text style={styles.coinName}>Bitcoin</Text>
             </View>
             <View>
-                <Text style={styles.totalBalance}>Total Balance</Text>
-                {/* Mostra o saldo apenas se ele não for null */}
-                {balance !== null ? (
-                    <Text style={styles.totalBalance}>$ {balance}</Text>
-                ) : (
-                    <Text style={styles.totalBalance}>Loading...</Text>
-                )}
-            </View>
-            <View style={styles.buttonsContainer}>
-                <TouchableOpacity style={styles.button} onPress={handleWithdrawPress}>
-                    <Text style={styles.buttonText}>Withdraw</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.button} onPress={handleDepositPress}>
-                    <Text style={styles.buttonText}>Deposit</Text>
-                </TouchableOpacity>
-            </View>
+                <Text style={styles.totalBalance}>Bitcoin Wallet don't work yet! Please await updates for next days!</Text>
+               </View>
         </ScrollView>
     );
 }
