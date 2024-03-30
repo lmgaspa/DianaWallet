@@ -5,12 +5,17 @@ import { useNavigation } from '@react-navigation/native';
 
 import { useRoute } from '@react-navigation/native';
 import { Connection, PublicKey } from '@solana/web3.js';
+import BackButton from '../Components/BackButton';
 
-export default function SolanaAddress() {
+export default function SolanaAddress({}) {
     const navigation = useNavigation();
     const route = useRoute();
     const [balance, setBalance] = useState(null);
     const address = route.params.address; 
+
+    const handleBackPress = () => {
+        navigation.goBack(); // Função para voltar para a tela anterior
+    };
 
     const handleWithdrawPress = () => {
         navigation.navigate('SolanaWithdraw', {address});
@@ -38,6 +43,7 @@ export default function SolanaAddress() {
 
     return (
         <ScrollView style={{ backgroundColor: 'black' }}>
+            <BackButton onPress={handleBackPress}/>
             <View style={styles.container}>
                 <Text style={styles.coinName}>Solana</Text>
             </View>

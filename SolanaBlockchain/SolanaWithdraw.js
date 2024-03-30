@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'; // Import the FontAwesome5 icon
+import BackButton from '../Components/BackButton';
 
-export default function SolanaWithdraw() {
+export default function SolanaWithdraw({navigation}) {
     const route = useRoute();
     const { balance } = route.params;
     const [addressWithdraw, setAddressWithdraw] = useState('');
@@ -12,6 +13,10 @@ export default function SolanaWithdraw() {
 
     const handleMaxClick = () => {
         setWithdrawalAmount(balance);
+    };
+
+    const handleBackPress = () => {
+        navigation.goBack(); // Função para voltar para a tela anterior
     };
 
     const handleWithdraw = () => {
@@ -49,6 +54,7 @@ export default function SolanaWithdraw() {
 
     return (
         <View style={styles.container}>
+            <BackButton onPress={handleBackPress}/>
             <Text style={styles.title}>Withdraw Solana</Text>
             <Text style={styles.label}>Address</Text>
             <View style={styles.inputContainer}>
@@ -100,7 +106,7 @@ const styles = StyleSheet.create({
     title: {
         color: 'white',
         fontSize: 20,
-        marginTop: 50,
+        marginTop: 70,
         marginBottom: 20,
         textAlign: 'center',
     },

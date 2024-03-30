@@ -1,11 +1,13 @@
 import 'react-native-get-random-values';
 import React, { useState, useEffect } from 'react';
-import { View, Text, ScrollView, StyleSheet } from 'react-native';
-import { useRoute } from '@react-navigation/native';
+import { View, Text, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
+import { useRoute, useNavigation } from '@react-navigation/native';
 import { Connection, PublicKey } from '@solana/web3.js';
+import { MaterialIcons } from '@expo/vector-icons';
 
 export default function Balance() {
     const route = useRoute();
+    const navigation = useNavigation();
     const [balance, setBalance] = useState(null);
 
     useEffect(() => {
@@ -24,10 +26,19 @@ export default function Balance() {
         getAddressBalance();
     }, [route.params.address]);
 
+    const goToSetupPage = () => {
+        navigation.navigate('Config');
+    };
+
     return (
         <ScrollView style={{ backgroundColor: 'black' }}>
             <View style={styles.container}>
-                <Text style={styles.totalBalance}>Total Balance</Text>
+                <View style={styles.balanceContainer}>
+                    <Text style={styles.totalBalance}>Total Balance</Text>
+                    <TouchableOpacity onPress={goToSetupPage}>
+                        <MaterialIcons name="settings" size={24} color="white" />
+                    </TouchableOpacity>
+                </View>
                 <Text style={styles.totalBalanceValue}>$ {balance !== null ? balance : 'Loading...'}</Text>
             </View>
         </ScrollView>
@@ -36,19 +47,26 @@ export default function Balance() {
 
 const styles = StyleSheet.create({
     container: {
+        flex: 1,
         justifyContent: 'center',
         alignItems: 'flex-start',
         marginTop: 100,
     },
+    balanceContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between', // Coloca o texto à esquerda e o ícone à direita
+        alignItems: 'center',
+        marginBottom: 10,
+        width: '100%', // Garante que o espaçamento seja total
+        paddingHorizontal: 20, // Espaçamento horizontal
+    },
     totalBalance: {
         color: 'white',
         fontSize: 18,
-        marginBottom: 10,
-        paddingLeft: 20,
     },
     totalBalanceValue: {
         color: 'white',
         fontSize: 18,
-        paddingLeft: 20,
+        paddingLeft: 20, // Adiciona um espaçamento à esquerda para o valor do saldo
     }
 });

@@ -1,67 +1,38 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
-import { Keypair } from "@solana/web3.js";
-import * as bip39 from "bip39";
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const ImportWallet = ({ navigation }) => {
-  const [secretPhrase, setSecretPhrase] = useState(Array(12).fill(''));
-  const [validationError, setValidationError] = useState(false);
-  const [address, setAddress] = useState('');
+const PasswordView = () => {
+  const [mnemonic, setMnemonic] = useState('');
 
-  const handleChangeText = (text, index) => {
-    const newSecretPhrase = [...secretPhrase];
-    newSecretPhrase[index] = text.toLowerCase(); // Convertendo a palavra para minúsculas
-    setSecretPhrase(newSecretPhrase);
-  };
+  useEffect(() => {
+    retrieveMnemonic();
+  }, []);
 
-  const handleValidation = () => {
-    const mnemonic = secretPhrase.join(' ');
-    const mnemonicWords = mnemonic.split(' ');
-
-    // Verifica se todas as palavras são preenchidas
-    const isAllWordsFilled = mnemonicWords.every(word => word.trim() !== '');
-
-    if (!isAllWordsFilled || !bip39.validateMnemonic(mnemonic)) {
-      setValidationError(true);
-      return;
-    }
-
+  const retrieveMnemonic = async () => {
     try {
-      const seed = bip39.mnemonicToSeedSync(mnemonic, "");
-      const seedSlice = Uint8Array.prototype.slice.call(seed, 0, 32);
-      const keypair = Keypair.fromSeed(seedSlice);
-    
-      console.log("Secret Key (Base58):", keypair.secretKey.toString('base58')); // Exibe a SecretKey em base58
-      setAddress(keypair.publicKey.toBase58());
-      setValidationError(false);
-      console.log("Address:", keypair.publicKey.toBase58());
-      navigation.navigate('Access', { address: keypair.publicKey.toBase58()});
+      const savedMnemonic = await AsyncStorage.getItem('solanaWallet');
+      if (savedMnemonic) {
+        setMnemonic(savedMnemonic);
+      } else {
+        console.log('Nenhum mnemônico encontrado no AsyncStorage.');
+      }
     } catch (error) {
-      console.error('Error in importing the Keypair:', error);
-      setValidationError(true);
+      console.error('Erro ao recuperar mnemônico do AsyncStorage:', error);
     }
   };
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>RESTORE WALLET</Text>
-      <Text style={styles.text}>Type your secret phrase to restore your existing wallet</Text>
-      {secretPhrase.map((word, index) => (
-        <TextInput
-          key={index.toString()}
-          style={styles.input}
-          placeholder={`Word ${index + 1}`}
-          placeholderTextColor="#FFFFFF80"
-          onChangeText={(text) => handleChangeText(text, index)}
-          value={secretPhrase[index]}
-        />
-      ))}
-      {validationError && (
-        <Text style={styles.errorText}>The phrase is incorrect</Text>
-      )}
-      <TouchableOpacity style={styles.button} onPress={handleValidation}>
-        <Text style={styles.buttonText}>RESTORE WALLET</Text>
-      </TouchableOpacity>
+      <Text style={styles.text}>Your secret phrase:</Text>
+      <View style={styles.mnemonicContainer}>
+        {mnemonic.split(' ').map((word, index) => (
+          <View key={index} style={styles.mnemonicBlock}>
+            <Text style={styles.mnemonicWord}>{word}</Text>
+          </View>
+        ))}
+      </View>
     </View>
   );
 };
@@ -82,34 +53,26 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 16,
     color: '#FFFFFF',
-    marginBottom: 20,
-    textAlign: 'center',
+    marginBottom: 10,
   },
-  input: {
-    width: '80%',
+  mnemonicContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+  },
+  mnemonicBlock: {
     backgroundColor: '#333333',
     padding: 10,
-    marginBottom: 10,
-    color: '#FFFFFF',
+    margin: 5,
     borderRadius: 5,
   },
-  button: {
-    backgroundColor: '#007AFF',
-    padding: 10,
-    borderRadius: 5,
-  },
-  buttonText: {
+  mnemonicWord: {
+    fontSize: 18,
     color: '#FFFFFF',
-    fontSize: 16,
-  },
-  errorText: {
-    color: 'red',
-    marginTop: 10,
-    marginBottom: 10,
   },
 });
 
-export default ImportWallet;
+export default PasswordView;
 
 
 

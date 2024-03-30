@@ -16,7 +16,6 @@ export default function Access({ route }) {
                 <BalanceofCoins address={address} />
                 <View style={styles.container}>
                 <CryptoTracker />
-                <FooterBar />
             </View>
         </ScrollView>
     )

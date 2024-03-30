@@ -23,6 +23,9 @@ import DianaWithdraw from './DianaBlockchain/DianaWithdraw';
 import SolanaDeposit from './SolanaBlockchain/SolanaDeposit';
 import SolanaWithdraw from './SolanaBlockchain/SolanaWithdraw';
 
+import PasswordView from './PasswordView';
+import Config from './Config';
+
 import { Buffer } from "buffer";
 global.Buffer = Buffer;
 
@@ -48,6 +51,8 @@ export default function App() {
         <Stack.Screen name="Portfolio" component={Portfolio} />
         <Stack.Screen name="BalanceofCoins" component={BalanceofCoins} />
         <Stack.Screen name="CryptoTracker" component={CryptoTracker} />
+        <Stack.Screen name="PasswordView" component={PasswordView} />
+        <Stack.Screen name="Config" component={Config} />
       </Stack.Navigator>
         <StatusBar style="auto" />
     </NavigationContainer>
