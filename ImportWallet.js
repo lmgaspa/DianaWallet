@@ -30,11 +30,10 @@ const ImportWallet = ({ navigation }) => {
       const seed = bip39.mnemonicToSeedSync(mnemonic, "");
       const seedSlice = Uint8Array.prototype.slice.call(seed, 0, 32);
       const keypair = Keypair.fromSeed(seedSlice);
-      console.log("Public Key:", keypair.publicKey.toBase58());
-      console.log("Secret Key:", keypair.secretKey.toString('hex'));
+    
+      console.log("Secret Key (Base58):", keypair.secretKey.toString('base58')); // Exibe a SecretKey em base58
       setAddress(keypair.publicKey.toBase58());
       setValidationError(false);
-      console.log(seed);
       console.log("Address:", keypair.publicKey.toBase58());
       navigation.navigate('Access', { address: keypair.publicKey.toBase58()});
     } catch (error) {

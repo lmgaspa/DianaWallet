@@ -5,10 +5,10 @@ export default function Home({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.mainContainer}>
-        <Text style={styles.mainTitle}>DianaWallet</Text>
+        <Text style={styles.mainTitle}>Diana Wallet</Text>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate('SolanaWallet')}>
+          onPress={() => navigation.navigate('Bip39CreateWallet')}>
           <Text style={styles.buttonText}>Create a Wallet</Text>
         </TouchableOpacity>
         <TouchableOpacity

@@ -6,28 +6,28 @@ import { useNavigation } from '@react-navigation/native';
 import { useRoute } from '@react-navigation/native';
 import { Connection, PublicKey } from '@solana/web3.js';
 
-export default function SolanaAddress() {
+export default function DianaAddress() {
     const navigation = useNavigation();
     const route = useRoute();
     const [balance, setBalance] = useState(null);
     const address = route.params.address; 
 
     const handleWithdrawPress = () => {
-        navigation.navigate('SolanaWithdraw', {address});
+        navigation.navigate('DianaWithdraw', {address});
     };
 
     const handleDepositPress = () => {
-        navigation.navigate('SolanaDeposit', {address});
+        navigation.navigate('DianaDeposit', {address});
     };
 
      useEffect(() => {
         const getAddressBalance = async () => {
             try {
                 const address = route.params.address;
-                const connection = new Connection('https://api.mainnet-beta.solana.com');
+                const connection = new Connection('https://solscan.io/token/13X7StSxBuGwknsb1nuEEFhU1nwkXURXTRtEDDuozpsx');
                 const publicKey = new PublicKey(address);
                 const accBalance = await connection.getBalance(publicKey);
-                setBalance(accBalance); 
+                setBalance(accBalance);
             } catch (error) {
                 console.error('Error fetching balance:', error);
             }
@@ -39,11 +39,10 @@ export default function SolanaAddress() {
     return (
         <ScrollView style={{ backgroundColor: 'black' }}>
             <View style={styles.container}>
-                <Text style={styles.coinName}>Solana</Text>
+                <Text style={styles.coinName}>Diana Coin</Text>
             </View>
             <View>
                 <Text style={styles.totalBalance}>Total Balance</Text>
-                {/* Mostra o saldo apenas se ele não for null */}
                 {balance !== null ? (
                     <Text style={styles.totalBalance}>$ {balance}</Text>
                 ) : (
@@ -61,6 +60,8 @@ export default function SolanaAddress() {
         </ScrollView>
     );
 }
+
+/*
 
 const styles = StyleSheet.create({
     container: {
@@ -96,3 +97,5 @@ const styles = StyleSheet.create({
         fontSize: 16,
     },
 });
+
+*/

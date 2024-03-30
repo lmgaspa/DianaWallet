@@ -29,6 +29,6 @@ const styles = StyleSheet.create({
   },
   splashText: {
     color: 'white',
-    fontSize: 24,
+    fontSize: 34,
   },
 });
