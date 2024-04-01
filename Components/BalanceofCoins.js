@@ -56,14 +56,14 @@ export default function BalanceofCoins() {
             </View>
             <View style={styles.priceChangeColumn}>
                 <View style={[styles.tableColumn2]}>
-                    <Text style={[styles.quantityofCoin]}>{balance !== null ? balance : 'Loading...'}</Text>
+                    <Text style={[styles.quantityofCoin]}>0</Text>
                 </View>
             </View>
         </View>
     </TouchableOpacity><TouchableOpacity onPress={goToSolanaAddress} style={styles.container}>
             <View style={styles.coinRow}>
                 <View style={styles.coinColumn}>
-                    <Image style={styles.coinImage} source={sol} />
+                    <Image style={styles.coinImage2} source={sol} />
                     <View style={styles.textContainer}>
                         <Text style={styles.title}> Solana</Text>
                         <Text style={styles.subtitle}> SOL</Text>
@@ -71,7 +71,7 @@ export default function BalanceofCoins() {
                 </View>
                 <View style={styles.priceChangeColumn}>
                     <View style={[styles.tableColumn2]}>
-                        <Text style={[styles.quantityofCoin]}>{balance !== null ? balance : 'Loading...'}</Text>
+                        <Text style={[styles.quantityofCoin]}>{balance !== null ? balance / 10**9 : 'Loading...'}</Text>
                     </View>
                 </View>
             </View>
@@ -79,7 +79,7 @@ export default function BalanceofCoins() {
         <TouchableOpacity onPress={goToDianaAddress} style={styles.container}>
             <View style={styles.coinRow}>
                 <View style={styles.coinColumn}>
-                    <Image style={styles.coinImage} source={dia} />
+                    <Image style={styles.coinImage2} source={dia} />
                     <View style={styles.textContainer}>
                         <Text style={styles.title}> Diana Coin</Text>
                         <Text style={styles.subtitle}> Diana Coin</Text>
@@ -87,7 +87,7 @@ export default function BalanceofCoins() {
                 </View>
                 <View style={styles.priceChangeColumn}>
                     <View style={[styles.tableColumn2]}>
-                        <Text style={[styles.quantityofCoin]}>{balance !== null ? balance : 'Loading...'}</Text>
+                        <Text style={[styles.quantityofCoin]}>0</Text>
                     </View>
                 </View>
             </View>
@@ -120,6 +120,12 @@ const styles = StyleSheet.create({
         height: 40,
         marginRight: 5,
     },
+    coinImage2: {
+        width: 40,
+        height: 40,
+        marginRight: 5,
+        borderRadius: 25,
+    },
     title: {
         fontWeight: 'bold',
         color: 'white',
@@ -139,8 +145,7 @@ const styles = StyleSheet.create({
         width: '95%',
         overflow: 'hidden',
         backgroundColor: '#172121',
-        
-        marginBottom: 10,
+        marginBottom: 0,
     },
     tableColumn2: {
         flexDirection: 'column',
@@ -151,6 +156,7 @@ const styles = StyleSheet.create({
         color: 'white',
         alignItems: 'flex-end',
         paddingBottom: 5,
+        fontWeight: 'bold'
     },
 });
 

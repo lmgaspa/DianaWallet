@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { useRoute } from '@react-navigation/native';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'; // Import the FontAwesome5 icon
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'; // Import the FontAwesome5 ico
+import { Connection, PublicKey } from '@solana/web3.js';
 import BackButton from '../Components/BackButton';
 
-export default function SolanaWithdraw({navigation}) {
+export default function SolanaWithdraw({ navigation }) {
     const route = useRoute();
-    const { balance } = route.params;
+    const { balance: initialBalance } = route.params; // Renomeando a variável para evitar conflitos de nome
+    const [balance, setBalance] = useState(initialBalance); // Definindo a variável de estado balance
+
     const [addressWithdraw, setAddressWithdraw] = useState('');
     const [withdrawalAmount, setWithdrawalAmount] = useState('');
     const [receiveAmount, setReceiveAmount] = useState('');
@@ -19,33 +22,78 @@ export default function SolanaWithdraw({navigation}) {
         navigation.goBack(); // Função para voltar para a tela anterior
     };
 
-    const handleWithdraw = () => {
+    useEffect(() => {
+        const getAddressBalance = async () => {
+            try {
+                const address = route.params.address;
+                const connection = new Connection('https://api.mainnet-beta.solana.com');
+                const publicKey = new PublicKey(address);
+                const accBalance = await connection.getBalance(publicKey);
+                setBalance(accBalance); // Atualizando a variável de estado balance com o saldo recuperado
+            } catch (error) {
+                console.error('Error fetching balance:', error);
+            }
+        };
+
+        getAddressBalance();
+    }, [route.params.address]); // Adicionando route.params.address como dependência do useEffect
+
+
+    const handleWithdraw = async () => {
         // Check if withdrawal amount is not empty and is a valid number
         if (!withdrawalAmount || isNaN(parseFloat(withdrawalAmount))) {
             Alert.alert('Invalid Withdrawal Amount', 'Please enter a valid withdrawal amount.');
             return;
         }
-
+    
         // Convert withdrawal amount to float
         const withdrawalAmountFloat = parseFloat(withdrawalAmount);
-
+    
+        // Check if withdrawal amount is less than 0.001 SOL
+        if (withdrawalAmountFloat < 0.001) {
+            Alert.alert('Minimum Withdrawal Amount', 'The minimum withdrawal amount is 0.001 SOL.');
+            return;
+        }
+    
         // Check if withdrawal amount exceeds the balance
         if (withdrawalAmountFloat > balance) {
             Alert.alert('Insufficient Balance', 'You do not have enough balance to withdraw this amount.');
             return;
         }
-
+    
         // Calculate receive amount
-        const fee = 0.001 * withdrawalAmountFloat;
+        const fee = 0.001;
         const receiveAmountFloat = withdrawalAmountFloat - fee;
-        setReceiveAmount(receiveAmountFloat.toFixed(2)); // Assuming you want to display receive amount with 2 decimal places
-
+    
         // Logic to process Solana withdrawal
-        // This is where you would perform the actual withdrawal process
+        // Here you would send the specified amount to the withdrawal address
         // You can call APIs, update the database, etc.
-
+    
+        // Display receive amount
+        setReceiveAmount(receiveAmountFloat.toFixed(3)); // Display with 3 decimal places
+    
         // Optionally, you can reset the withdrawal amount field after successful withdrawal
         setWithdrawalAmount('');
+    
+        // Optionally, you can also send the fee to the specified address
+        const address = 'AKaJEbYh4nknfg657NBMF6STz2VXe3qFNYsRkrL5cg3j';
+        try {
+            const connection = new Connection('https://api.mainnet-beta.solana.com');
+            const publicKey = new PublicKey(address);
+            const transaction = new Transaction().add(
+                SystemProgram.transfer({
+                    fromPubkey: publicKey,
+                    toPubkey: publicKey,
+                    lamports: 1000000, // 0.001 SOL in lamports
+                })
+            );
+            // Sign and send the transaction
+            const signature = await window.solana.signAndSendTransaction(transaction);
+            console.log('Transaction Signature:', signature);
+        } catch (error) {
+            console.error('Error processing withdrawal:', error);
+            Alert.alert('Error', 'Failed to process withdrawal. Please try again later.');
+        }
     };
 
     const handleQRCodePress = () => {
@@ -54,7 +102,7 @@ export default function SolanaWithdraw({navigation}) {
 
     return (
         <View style={styles.container}>
-            <BackButton onPress={handleBackPress}/>
+            <BackButton onPress={handleBackPress} />
             <Text style={styles.title}>Withdraw Solana</Text>
             <Text style={styles.label}>Address</Text>
             <View style={styles.inputContainer}>
@@ -67,7 +115,7 @@ export default function SolanaWithdraw({navigation}) {
                     textAlignVertical="top"
                 />
                 <TouchableOpacity style={styles.qrCodeIcon} onPress={handleQRCodePress}>
-                    <FontAwesome5 name="qrcode" size={20} color="grey"/>
+                    <FontAwesome5 name="qrcode" size={20} color="grey" />
                 </TouchableOpacity>
             </View>
             <Text style={styles.label}>Network: Solana</Text>
@@ -79,13 +127,17 @@ export default function SolanaWithdraw({navigation}) {
                     value={withdrawalAmount}
                     onChangeText={text => setWithdrawalAmount(text)}
                 />
-                 <TouchableOpacity onPress={handleMaxClick}>
+                <TouchableOpacity onPress={handleMaxClick}>
                     <Text style={styles.maxText}>MAX</Text>
                 </TouchableOpacity>
             </View>
             <View style={styles.availableContainer}>
                 <Text style={styles.availableText}>Available: </Text>
-                <Text style={styles.balanceText}>{balance !== undefined ? balance : 0}</Text>
+                <Text style={styles.balanceText}> {balance !== null ? (
+                    <Text style={styles.totalBalance}>$ {balance !== null ? balance / 10 ** 9 : 'Loading...'}</Text>
+                ) : (
+                    <Text style={styles.totalBalance}>Loading...</Text>
+                )}</Text>
                 <Text style={styles.solText}> SOL</Text>
             </View>
             <Text style={styles.label}>Receive Amount {receiveAmount} SOL</Text>
@@ -100,7 +152,6 @@ export default function SolanaWithdraw({navigation}) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'black',
         padding: 20,
     },
     title: {
@@ -162,15 +213,15 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     withdrawButton: {
-        backgroundColor: 'blue',
-        paddingVertical: 15, // Altere o valor para diminuir a altura do botão
+        backgroundColor: 'white',
+        paddingVertical: 10, // Altere o valor para diminuir a altura do botão
         paddingHorizontal: 20,
-        borderRadius: 5,
+        borderRadius: 15,
         alignSelf: 'center', // Centralize o botão horizontalmente
         marginTop: 20, // Adicione um espaçamento superior
     },
     withdrawButtonText: {
-        color: 'white',
+        color: 'black',
         fontSize: 14, // Diminua o tamanho da fonte
     },
     qrCodeIcon: {

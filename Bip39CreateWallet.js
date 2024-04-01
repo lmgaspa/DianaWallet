@@ -29,7 +29,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'black',
   },
   text: {
     color: 'white',
@@ -46,7 +45,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'black', // Definindo o fundo preto
+   
   },
   text: {
     color: 'white', // Definindo a cor do texto como branco

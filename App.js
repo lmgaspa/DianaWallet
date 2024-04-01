@@ -33,8 +33,8 @@ export default function App() {
   const Stack = createStackNavigator();
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Splash" screenOptions={{ headerShown: false, gestureEnabled: false, animationEnabled: false }}>
+    <NavigationContainer theme={{ colors: { background: 'black' }}}>
+      <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false, gestureEnabled: false, animationEnabled: false }}>
         <Stack.Screen name="Splash" component={Splash} />
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="ImportWallet" component={ImportWallet} />

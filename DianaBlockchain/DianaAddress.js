@@ -22,7 +22,7 @@ export default function DianaAddress({ navigation }) {
     };
 
     return (
-        <ScrollView style={{ backgroundColor: 'black' }}>
+        <ScrollView>
             <BackButton onPress={handleBackPress}/>
             <View style={styles.container}>
                 <Text style={styles.coinName}>Diana Coin</Text>

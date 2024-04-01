@@ -13,7 +13,7 @@ export default function Portfolio({ balance }) {
     }, []); // Run only once when the component mounts
 
     return (
-        <ScrollView style={{ backgroundColor: 'black' }}>
+        <ScrollView>
             <View style={styles.container}>
                 <View style={styles.circle}>
                     {showHaveCoins ? (

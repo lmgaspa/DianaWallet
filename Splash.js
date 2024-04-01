@@ -73,12 +73,12 @@ export default SolanaWallet;
 const styles = StyleSheet.create({
   splashContainer: {
     flex: 1,
-    backgroundColor: 'black',
     alignItems: 'center',
     justifyContent: 'center',
   },
   splashText: {
     color: 'white',
-    fontSize: 34,
+    fontSize: 38,
+    fontWeight: 'bold',
   },
 });

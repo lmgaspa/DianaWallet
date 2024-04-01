@@ -42,7 +42,7 @@ export default function SolanaAddress({}) {
     }, [address]);
 
     return (
-        <ScrollView style={{ backgroundColor: 'black' }}>
+        <ScrollView>
             <BackButton onPress={handleBackPress}/>
             <View style={styles.container}>
                 <Text style={styles.coinName}>Solana</Text>
@@ -51,7 +51,7 @@ export default function SolanaAddress({}) {
                 <Text style={styles.totalBalance}>Total Balance</Text>
                 {/* Mostra o saldo apenas se ele não for null */}
                 {balance !== null ? (
-                    <Text style={styles.totalBalance}>$ {balance}</Text>
+                    <Text style={styles.totalBalance}>$ {balance !== null ? balance / 10**9 : 'Loading...'}</Text>
                 ) : (
                     <Text style={styles.totalBalance}>Loading...</Text>
                 )}
@@ -92,13 +92,14 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     button: {
-        backgroundColor: 'blue',
+        backgroundColor: 'white',
         paddingVertical: 10,
         paddingHorizontal: 20,
         marginRight: 10,
+        borderRadius: 15,
     },
     buttonText: {
-        color: 'white',
+        color: 'black',
         fontSize: 16,
     },
 });

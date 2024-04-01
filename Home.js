@@ -27,23 +27,23 @@ export default function Home({ navigation }) {
     },
     mainContainer: {
       flex: 1,
-      backgroundColor: 'black',
       alignItems: 'center',
       justifyContent: 'center',
     },
     mainTitle: {
       color: 'white',
-      fontSize: 24,
+      fontSize: 38,
+      fontWeight: 'bold',
       marginBottom: 20,
     },
     button: {
-      backgroundColor: 'blue',
-      padding: 10,
+      backgroundColor: 'white',
+      padding: 12,
       margin: 10,
-      borderRadius: 5,
+      borderRadius: 15,
     },
     buttonText: {
-      color: 'white',
+      color: 'black',
       fontSize: 16,
     },
   });

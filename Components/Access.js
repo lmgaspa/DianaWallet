@@ -11,7 +11,7 @@ export default function Access({ route }) {
     const { address } = route.params;
     
     return (
-        <ScrollView style={{ backgroundColor: 'black' }}>
+        <ScrollView>
                 <Balance />
                 <BalanceofCoins address={address} />
                 <View style={styles.container}>

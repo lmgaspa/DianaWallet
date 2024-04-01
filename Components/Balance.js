@@ -22,16 +22,16 @@ export default function Balance() {
                 console.error('Error fetching balance:', error);
             }
         };
-
+    
         getAddressBalance();
     }, [route.params.address]);
 
     const goToSetupPage = () => {
-        navigation.navigate('Setup'); // Navega para a página Setup.js
+        navigation.navigate('Config'); // Navega para a página Setup.js
     };
 
     return (
-        <ScrollView style={{ backgroundColor: 'black' }}>
+        <ScrollView>
             <View style={styles.container}>
                 <View style={styles.balanceContainer}>
                     <Text style={styles.totalBalance}>Total Balance</Text>
@@ -39,7 +39,7 @@ export default function Balance() {
                         <MaterialIcons name="settings" size={24} color="white" />
                     </TouchableOpacity>
                 </View>
-                <Text style={styles.totalBalanceValue}>$ {balance !== null ? balance : 'Loading...'}</Text>
+                <Text style={styles.totalBalanceValue}>$ {balance !== null ? balance / 10**9 : 'Loading...'}</Text>
             </View>
         </ScrollView>
     );
@@ -68,5 +68,6 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: 18,
         paddingLeft: 20, // Adiciona um espaçamento à esquerda para o valor do saldo
+        fontWeight: 'bold'
     }
 });

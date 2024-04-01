@@ -94,7 +94,6 @@ export default function DianaWithdraw() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'black',
         padding: 20,
     },
     title: {

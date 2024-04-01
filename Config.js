@@ -25,20 +25,20 @@ const Config = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'black',
+  
         justifyContent: 'center',
         alignItems: 'center',
     },
     button: {
         width: '90%',
-        backgroundColor: 'blue',
+        backgroundColor: 'white',
         paddingVertical: 15,
         paddingHorizontal: 20,
         borderRadius: 10,
         alignItems: 'center',
     },
     buttonText: {
-        color: 'white',
+        color: 'black',
         fontSize: 18,
     },
 });

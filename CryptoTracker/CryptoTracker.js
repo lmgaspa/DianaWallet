@@ -24,16 +24,17 @@ const coinSubtitles = ['Bitcoin', 'Ethereum', 'Binance Coin', 'Solana', 'Cardano
 'Pepe', 'Polkadot'];
 
 function CryptoTracker() {
+  
   const coinsPrice = useContext(CoinsPriceContext);
   const priceChange = useContext(PriceChangeContext);
 
   const getPriceChangeColor = priceChange => {
-    return priceChange >= 0 ? 'green' : 'red';
+    return priceChange >= 0 ? '#9EA93F' : 'red';
   };
 
   const getBackgroundGradient = priceChange => {
     const leftColor = '#172121';
-    const rightColor = priceChange >= 0 ? '#31572c' : '#580c1f';
+    const rightColor = priceChange >= 0 ? '#315C2B' : '#580c1f';
 
     const colors = Array.from({ length: 2 }, () => leftColor).concat(rightColor);
 
@@ -80,11 +81,11 @@ function CryptoTracker() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000000',
   },
   tableContainer: {
     flex: 1,
     padding: 20,
+    paddingTop: 20,
   },
   marketTitle: {
     fontSize: 20,
@@ -142,6 +143,7 @@ const styles = StyleSheet.create({
   },
   changeText: {
     color: 'white',
+    fontWeight: 'bold'
   },
   backgroundGradient: {
     ...StyleSheet.absoluteFillObject,
