@@ -1,56 +1,59 @@
-import React, { useState, useEffect } from 'react';
-import 'react-native-get-random-values';
+import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/native';
 import { v4 as uuidv4 } from 'uuid';
 import { generateMnemonic } from 'bip39';
 import { Keypair } from '@solana/web3.js';
-import { useNavigation } from '@react-navigation/native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const SolanaWallet = () => {
-  const [seed, setSeed] = useState('');
-  const [mnemonics, setMnemonics] = useState('');
-  const [address, setAddress] = useState('');
+export default function Splash() {
   const navigation = useNavigation();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    generateSeed();
+    // Espera 4 segundos na tela de splash
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 4000); // 4 seconds
+
+    return () => clearTimeout(timer);
   }, []);
 
-  const generateSeed = async () => {
-    try {
-      const savedAddress = await AsyncStorage.getItem('solanaAddress');
-      const savedWallet = await AsyncStorage.getItem('solanaWallet');
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        const savedAddress = await AsyncStorage.getItem('solanaAddress');
+        const savedWallet = await AsyncStorage.getItem('solanaWallet');
 
-      if (savedAddress && savedWallet) {
-        console.log('Dados já existem localmente:');
-        console.log('Endereço recuperado:', savedAddress);
-        console.log('Carteira recuperada:', savedWallet);
-
-        setAddress(savedAddress);
-        setMnemonics(savedWallet);
-        navigateToAccessPage(savedAddress, savedWallet);
-      } else {
-        const seed = uuidv4();
-        setSeed(seed);
-
-        const mnemonic = generateMnemonic();
-        setMnemonics(mnemonic);
-
-        const keypair = Keypair.generate();
-        const generatedAddress = keypair.publicKey.toString();
-        setAddress(generatedAddress);
-
-        console.log('Solana Address: ' + generatedAddress);
-        console.log('Solana Mnemonic: ' + mnemonic);
-        console.log('Solana Seed: ' + seed);
-
-        saveDataLocally(generatedAddress, mnemonic);
-        navigateToAccessPage(generatedAddress, mnemonic);
+        if (savedAddress && savedWallet) {
+          console.log('Endereço recuperado:', savedAddress);
+          console.log('Carteira recuperada:', savedWallet);
+          navigateToAccessPage(savedAddress, savedWallet);
+        } else {
+          console.log('Nenhum dado salvo localmente, navegando para Home.');
+          navigateToHomePage();
+        }
+      } catch (error) {
+        console.error('Erro ao carregar ou gerar dados:', error);
       }
-    } catch (error) {
-      console.error('Erro ao gerar ou recuperar dados:', error);
+    };
+
+    if (!loading) {
+      loadData();
     }
+  }, [loading]);
+
+  const generateAndSaveDataLocally = async () => {
+    const seed = uuidv4();
+    const mnemonic = generateMnemonic();
+    const keypair = Keypair.generate();
+    const generatedAddress = keypair.publicKey.toString();
+
+    console.log('Solana Address: ' + generatedAddress); // Log generated address
+    console.log('Solana Seed: ' + seed); // Log seed
+
+    await saveDataLocally(generatedAddress, mnemonic);
+    navigateToAccessPage(generatedAddress, mnemonic);
   };
 
   const saveDataLocally = async (generatedAddress, mnemonic) => {
@@ -64,21 +67,36 @@ const SolanaWallet = () => {
   };
 
   const navigateToAccessPage = (address, mnemonic) => {
+    console.log('Navegando para Access com Address:', address); // Log para verificar a navegação
+    console.log('Navegando para Access com Mnemonic:', mnemonic); // Log para verificar a navegação
     navigation.navigate('Access', { address, mnemonic });
   };
-}
 
-export default SolanaWallet;
+  const navigateToHomePage = () => {
+    console.log('Navegando para Home'); // Log para verificar a navegação
+    navigation.navigate('Home');
+  };
+
+  return (
+    <>
+      {loading && (
+        <View style={styles.splashContainer}>
+          <Text style={styles.splashText}>Diana Wallet</Text>
+        </View>
+      )}
+    </>
+  );
+}
 
 const styles = StyleSheet.create({
   splashContainer: {
     flex: 1,
+    backgroundColor: 'black',
     alignItems: 'center',
     justifyContent: 'center',
   },
   splashText: {
     color: 'white',
-    fontSize: 38,
-    fontWeight: 'bold',
+    fontSize: 24,
   },
 });

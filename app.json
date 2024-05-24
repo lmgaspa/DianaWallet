@@ -2,7 +2,7 @@
   "expo": {
     "name": "my-wallet",
     "slug": "my-wallet",
-    "version": "1.0.0",
+    "version": "2.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -21,10 +21,17 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.luizmgba.mywallet",
+      "versionCode": 3
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "40ce6750-9e09-423a-8376-60e5e13152b8"
+      }
     }
   }
 }

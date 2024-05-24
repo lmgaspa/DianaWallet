@@ -1,4 +1,5 @@
 import React from 'react';
+import { Screen } from 'react-native-screens';
 import "react-native-get-random-values";
 import { StatusBar } from 'expo-status-bar';
 import 'react-native-gesture-handler';
@@ -34,7 +35,7 @@ export default function App() {
 
   return (
     <NavigationContainer theme={{ colors: { background: 'black' }}}>
-      <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false, gestureEnabled: false, animationEnabled: false }}>
+      <Stack.Navigator initialRouteName="Splash" screenOptions={{ headerShown: false, gestureEnabled: false, animationEnabled: false }}>
         <Stack.Screen name="Splash" component={Splash} />
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="ImportWallet" component={ImportWallet} />
