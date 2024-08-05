@@ -1,28 +1,34 @@
-image: node:14
-
 stages:
   - install
   - build
   - test
-
-before_script:
-  - npm install -g expo-cli
-  - expo --version
+  - deploy
 
 install:
   stage: install
   script:
-    - npm install
-    - ls -la node_modules
+    - npm install -g expo-cli
+    - expo --version
+    - npm ci
 
 build:
   stage: build
   script:
-    - echo "Building project"
-    - npm run build
+    - npx expo export:web
 
 test:
   stage: test
   script:
     - echo "Running tests"
-    - npm test
+    # Adicione seus comandos de teste aqui, por exemplo:
+    # - npm test
+
+deploy:
+  stage: deploy
+  script:
+    - echo "Deploying to the server"
+    # Adicione seus comandos de deploy aqui, por exemplo:
+    # - scp -r web-build/ user@server:/path/to/deploy
+  only:
+    - main
+
