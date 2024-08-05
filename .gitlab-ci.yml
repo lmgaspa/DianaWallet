@@ -7,15 +7,18 @@ stages:
 
 before_script:
   - npm install -g expo-cli
+  - expo --version
 
 install:
   stage: install
   script:
-    - npm install
+    - npm ci
+    - ls -la node_modules
 
 build:
   stage: build
   script:
+    - echo "Building project"
     - npm run build
 
 test:
