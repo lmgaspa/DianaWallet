@@ -17,6 +17,11 @@ export default function Home({ navigation }) {
           <Text style={styles.buttonText}>I Have a Wallet</Text>
         </TouchableOpacity>
       </View>
+      <View style={styles.footer}>
+        <TouchableOpacity onPress={() => navigation.navigate('PrivacyPolicy')}>
+          <Text style={styles.footerText}>Privacy Policy</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
@@ -45,6 +50,15 @@ export default function Home({ navigation }) {
     buttonText: {
       color: 'black',
       fontSize: 16,
+    },
+    footer: {
+      alignItems: 'center',
+      marginBottom: 50,
+    },
+    footerText: {
+      color: 'blue',
+      fontSize: 20,
+      textDecorationLine: 'underline',
     },
   });
   
