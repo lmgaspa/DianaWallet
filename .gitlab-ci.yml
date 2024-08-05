@@ -20,12 +20,8 @@ build:
   script:
     - echo "Listing files in current directory"
     - ls -al
-    - echo "Listing files in root directory"
-    - ls -al /
-    - echo "Changing to the correct directory"
-    - cd /builds/diana-global/diana-wallet
-    - ls -al
     - docker-compose up -d
+    - ls -al
     - docker-compose exec expo npm install
 
 test:
