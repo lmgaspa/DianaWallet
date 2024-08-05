@@ -1,0 +1,28 @@
+image: node:14
+
+stages:
+  - test
+  - build
+
+variables:
+  EXPO_TOKEN: $EXPO_TOKEN
+
+cache:
+  paths:
+    - node_modules/
+
+test:
+  stage: test
+  script:
+    - npm ci
+    - npm test
+
+build:
+  stage: build
+  script:
+    - npm ci
+    - npm install -g expo-cli
+    - expo build:android --non-interactive --no-wait --type apk
+  artifacts:
+    paths:
+      - ./dist
