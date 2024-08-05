@@ -15,7 +15,7 @@ const PriceChangeContext = createContext({
   dotPriceChange: 0,
 });
 
-const PriceChangeProvider = ({ children }) => {
+const PriceChangeProvider = ({ children, onLoad }) => {
   const [btcPriceChange, setBtcPriceChange] = useState(0);
   const [ethPriceChange, setEthPriceChange] = useState(0);
   const [bnbPriceChange, setBnbPriceChange] = useState(0);
@@ -52,8 +52,14 @@ const PriceChangeProvider = ({ children }) => {
       setFlokiPriceChange(responses[9].priceChangePercent);
       setPepePriceChange(responses[10].priceChangePercent);
       setDotPriceChange(responses[11].priceChangePercent);
+
+      // Indicate loading is complete
+      onLoad();
     };
+
     fetchData();
+    const intervalId = setInterval(fetchData, 5000);
+    return () => clearInterval(intervalId);
   }, []);
 
   return (

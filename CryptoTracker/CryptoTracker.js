@@ -1,38 +1,36 @@
-import React, { useContext } from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import React, { useContext, useState } from 'react';
+import { View, Text, Image, StyleSheet, ActivityIndicator } from 'react-native';
 import { CoinsPriceContext, CoinsPriceProvider } from './PriceCoins';
 import { PriceChangeContext, PriceChangeProvider } from './PriceChange';
-import btc from '../assets/images/btc.png'
-import eth from '../assets/images/eth.png'
-import bnb from '../assets/images/bnb.png'
-import sol from '../assets/images/sol.png'
-import ada from '../assets/images/ada.png'
-import xrp from '../assets/images/xrp.png'
-import ltc from '../assets/images/ltc.png'
-import doge from '../assets/images/doge.png'
-import shib from '../assets/images/shib.png'
-import floki from '../assets/images/floki.png'
-import pepe from '../assets/images/pepe.png'
-import dot from '../assets/images/dot.png'
+import btc from '../assets/images/btc.png';
+import eth from '../assets/images/eth.png';
+import bnb from '../assets/images/bnb.png';
+import sol from '../assets/images/sol.png';
+import ada from '../assets/images/ada.png';
+import xrp from '../assets/images/xrp.png';
+import ltc from '../assets/images/ltc.png';
+import doge from '../assets/images/doge.png';
+import shib from '../assets/images/shib.png';
+import floki from '../assets/images/floki.png';
+import pepe from '../assets/images/pepe.png';
+import dot from '../assets/images/dot.png';
 import { LinearGradient } from 'expo-linear-gradient';
 
 const coinImages = [btc, eth, bnb, sol, ada, xrp, ltc, doge, shib, floki, pepe, dot];
 
 const coinNames = ['BTC', 'ETH', 'BNB', 'SOL', 'ADA', 'XRP', 'LTC', 'DOGE', 'SHIB', 'FLOKI', 'PEPE', 'DOT'];
 
-const coinSubtitles = ['Bitcoin', 'Ethereum', 'Binance Coin', 'Solana', 'Cardano', 'XRP', 'Litecoin', 'Dogecoin', 'Shib', 'Floki',
-'Pepe', 'Polkadot'];
+const coinSubtitles = ['Bitcoin', 'Ethereum', 'Binance Coin', 'Solana', 'Cardano', 'XRP', 'Litecoin', 'Dogecoin', 'Shib', 'Floki', 'Pepe', 'Polkadot'];
 
 function CryptoTracker() {
-  
   const coinsPrice = useContext(CoinsPriceContext);
   const priceChange = useContext(PriceChangeContext);
 
-  const getPriceChangeColor = priceChange => {
+  const getPriceChangeColor = (priceChange) => {
     return priceChange >= 0 ? '#9EA93F' : 'red';
   };
 
-  const getBackgroundGradient = priceChange => {
+  const getBackgroundGradient = (priceChange) => {
     const leftColor = '#172121';
     const rightColor = priceChange >= 0 ? '#315C2B' : '#580c1f';
 
@@ -47,6 +45,10 @@ function CryptoTracker() {
       />
     );
   };
+
+  if (!coinsPrice || !priceChange) {
+    return <ActivityIndicator size="large" color="#0000ff" />;
+  }
 
   return (
     <View style={styles.container}>
@@ -150,21 +152,17 @@ const styles = StyleSheet.create({
   },
 });
 
-export default () => (
-  <CoinsPriceProvider>
-    <PriceChangeProvider>
-      <CryptoTracker />
-    </PriceChangeProvider>
-  </CoinsPriceProvider>
-);
+const App = () => {
+  const [coinsPriceLoaded, setCoinsPriceLoaded] = useState(false);
+  const [priceChangeLoaded, setPriceChangeLoaded] = useState(false);
 
-/* 
-<Text style={styles.subtitle}>{coin}</Text>
- <Text style={styles.tableHeaderText}>Name</Text>
-          </View>
-          <View style={[styles.tableColumn, { alignItems: 'flex-end' }]}>
-            <Text style={styles.tableHeaderText}>Price</Text>
-          </View>
-          <View style={[styles.tableColumn, { alignItems: 'flex-end' }]}>
-            <Text style={styles.tableHeaderText}>24h%</Text>
-*/
+  return (
+    <CoinsPriceProvider onLoad={() => setCoinsPriceLoaded(true)}>
+      <PriceChangeProvider onLoad={() => setPriceChangeLoaded(true)}>
+        {coinsPriceLoaded && priceChangeLoaded ? <CryptoTracker /> : <ActivityIndicator size="large" color="#0000ff" />}
+      </PriceChangeProvider>
+    </CoinsPriceProvider>
+  );
+};
+
+export default App;

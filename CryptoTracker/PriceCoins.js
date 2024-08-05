@@ -2,7 +2,7 @@ import React, { createContext, useState, useEffect } from 'react';
 
 export const CoinsPriceContext = createContext({});
 
-export function CoinsPriceProvider({ children }) {
+export function CoinsPriceProvider({ children, onLoad }) {
   const [btcPrice, setBtcPrice] = useState(0);
   const [btcPreviousPrice, setBtcPreviousPrice] = useState(0);
   const [ethPrice, setEthPrice] = useState(0);
@@ -29,8 +29,7 @@ export function CoinsPriceProvider({ children }) {
   const [dotPreviousPrice, setDotPreviousPrice] = useState(0);
 
   useEffect(() => {
-    const intervalId = setInterval(async () => {
-  
+    const fetchData = async () => {
       const [btcResponse, ethResponse, bnbResponse, solResponse, xrpResponse, adaResponse, ltcResponse, dogeResponse, shibResponse,
         flokiResponse, pepeResponse, dotResponse] = await Promise.all([
         fetch('https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT'),
@@ -116,9 +115,13 @@ export function CoinsPriceProvider({ children }) {
  
       setDotPreviousPrice(dotPrice);
       setDotPrice(dotNewPrice);
-  
-    }, 5000);
-  
+
+      // Indicate loading is complete
+      onLoad();
+    };
+
+    fetchData();
+    const intervalId = setInterval(fetchData, 5000);
     return () => clearInterval(intervalId);
   }, []);
 
