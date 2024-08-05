@@ -1,4 +1,4 @@
-image: node:14
+image: docker:stable
 
 services:
   - docker:dind
@@ -6,19 +6,14 @@ services:
 variables:
   DOCKER_DRIVER: vfs
   DOCKER_TLS_CERTDIR: ""
-  EXPO_TOKEN: $EXPO_TOKEN
 
 stages:
   - test
   - build
 
 before_script:
-  # Instalar Docker CLI no Debian
-  - apt-get update
-  - apt-get install -y docker.io
-  # Iniciar o daemon do Docker com driver vfs
-  - dockerd --storage-driver=vfs --host=unix:///var/run/docker.sock --host=tcp://0.0.0.0:2375 & sleep 10
-  - docker info
+  - apk add --no-cache python3 py3-pip
+  - pip3 install docker-compose
 
 cache:
   paths:
@@ -27,12 +22,24 @@ cache:
 test:
   stage: test
   script:
+    - docker info
+    - docker-compose --version
+    - apk add --no-cache bash
+    - apk add --no-cache git
+    - apk add --no-cache npm
+    - apk add --no-cache nodejs
     - npm ci
     - npm test
 
 build:
   stage: build
   script:
+    - docker info
+    - docker-compose --version
+    - apk add --no-cache bash
+    - apk add --no-cache git
+    - apk add --no-cache npm
+    - apk add --no-cache nodejs
     - npm ci
     - npm install -g expo-cli
     - expo build:android --non-interactive --no-wait --type apk
