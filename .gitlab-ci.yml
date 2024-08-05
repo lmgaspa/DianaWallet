@@ -17,7 +17,7 @@ before_script:
   - apt-get update
   - apt-get install -y docker.io
   # Iniciar o daemon do Docker
-  - dockerd-entrypoint.sh & sleep 10
+  - dockerd --host=unix:///var/run/docker.sock --host=tcp://0.0.0.0:2375 & sleep 10
   - docker info
 
 cache:
