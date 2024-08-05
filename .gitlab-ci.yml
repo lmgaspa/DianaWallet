@@ -16,6 +16,8 @@ before_script:
   # Instalar Docker CLI no Debian
   - apt-get update
   - apt-get install -y docker.io
+  # Iniciar o daemon do Docker
+  - dockerd-entrypoint.sh & sleep 10
   - docker info
 
 cache:
