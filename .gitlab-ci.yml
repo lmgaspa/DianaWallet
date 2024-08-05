@@ -1,0 +1,35 @@
+image: node:14
+
+services:
+  - docker:dind
+
+variables:
+  DOCKER_DRIVER: overlay2
+  EXPO_TOKEN: $EXPO_TOKEN
+
+stages:
+  - test
+  - build
+
+before_script:
+  - docker info
+
+cache:
+  paths:
+    - node_modules/
+
+test:
+  stage: test
+  script:
+    - npm ci
+    - npm test
+
+build:
+  stage: build
+  script:
+    - npm ci
+    - npm install -g expo-cli
+    - expo build:android --non-interactive --no-wait --type apk
+  artifacts:
+    paths:
+      - ./dist
