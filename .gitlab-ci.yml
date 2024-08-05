@@ -19,9 +19,9 @@ build:
   stage: build
   script:
     - docker-compose up -d
-    - docker-compose run --rm expo npm install
+    - docker-compose exec expo npm install
 
 test:
   stage: test
   script:
-    - docker-compose run --rm expo npm test
+    - docker-compose exec expo npm test
