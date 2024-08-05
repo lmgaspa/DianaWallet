@@ -22,6 +22,9 @@ build:
     - ls -al
     - echo "Listing files in root directory"
     - ls -al /
+    - echo "Changing to the correct directory"
+    - cd /builds/diana-global/diana-wallet
+    - ls -al
     - docker-compose up -d
     - docker-compose exec expo npm install
 
