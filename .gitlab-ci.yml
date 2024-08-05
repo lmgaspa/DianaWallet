@@ -1,6 +1,7 @@
 variables:
-  SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar"  # Defines the location of the analysis task cache
-  GIT_DEPTH: "0"  # Tells git to fetch all the branches of the project, required by the analysis task
+  SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar"  # Define o local do cache da tarefa de análise
+  GIT_DEPTH: "0"  # Informa ao git para buscar todos os branches do projeto, necessário para a tarefa de análise
+
 sonarcloud-check:
   tags:
       - DianaWallet
