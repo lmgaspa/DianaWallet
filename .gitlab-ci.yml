@@ -4,7 +4,7 @@ services:
   - docker:dind
 
 variables:
-  DOCKER_DRIVER: overlay2
+  DOCKER_DRIVER: vfs
   DOCKER_TLS_CERTDIR: ""
   EXPO_TOKEN: $EXPO_TOKEN
 
@@ -16,8 +16,8 @@ before_script:
   # Instalar Docker CLI no Debian
   - apt-get update
   - apt-get install -y docker.io
-  # Iniciar o daemon do Docker
-  - dockerd --host=unix:///var/run/docker.sock --host=tcp://0.0.0.0:2375 & sleep 10
+  # Iniciar o daemon do Docker com driver vfs
+  - dockerd --storage-driver=vfs --host=unix:///var/run/docker.sock --host=tcp://0.0.0.0:2375 & sleep 10
   - docker info
 
 cache:
