@@ -1,30 +1,24 @@
-image: docker:stable
-
-services:
-  - docker:dind
-
-variables:
-  DOCKER_HOST: tcp://docker:2375/
-  DOCKER_DRIVER: overlay2
-
-before_script:
-  - apk update
-  - apk add --no-cache docker-compose
+image: node:14
 
 stages:
+  - install
   - build
   - test
+
+before_script:
+  - npm install -g expo-cli
+
+install:
+  stage: install
+  script:
+    - npm install
 
 build:
   stage: build
   script:
-    - echo "Listing files in current directory"
-    - ls -al
-    - docker-compose up -d
-    - ls -al
-    - docker-compose exec expo npm install
+    - npm run build
 
 test:
   stage: test
   script:
-    - docker-compose exec expo npm test
+    - npm test
