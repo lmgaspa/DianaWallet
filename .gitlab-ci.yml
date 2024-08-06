@@ -34,3 +34,4 @@ sonarcloud-check:
     - if: '$CI_MERGE_REQUEST_ID'  # Executa em merge requests
     - if: '$CI_COMMIT_REF_NAME == "main"'  # Executa na branch main
     - if: '$CI_COMMIT_REF_NAME == "develop"'  # Executa na branch develop
+
