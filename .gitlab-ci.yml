@@ -2,8 +2,13 @@ variables:
   SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar"  # Define o local do cache da tarefa de análise
   GIT_DEPTH: "0"  # Diz ao git para buscar todos os branches do projeto, necessário pela tarefa de análise
 
+stages:
+  - build
+  - test
+  - deploy
+
 setup:
-  stage: setup
+  stage: build
   image: node:latest
   script:
     - npm install
@@ -19,7 +24,7 @@ test:
       - coverage/
 
 sonarcloud-check:
-  stage: sonar
+  stage: deploy
   image:
     name: sonarsource/sonar-scanner-cli:latest
     entrypoint: [""]
