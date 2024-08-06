@@ -7,8 +7,7 @@ setup:
   image: node:latest
   stage: setup
   script:
-    - npm install jest --save-dev
-    - npm install jest-sonar-reporter --save-dev
+    - npm install --save-dev jest jest-sonar-reporter
 
 test:
   image: node:latest
