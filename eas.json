@@ -11,8 +11,9 @@
       "distribution": "internal"
     },
     "production": {
-      "distribution": "store",
-      "android": {}
+      "android": {
+        "buildType": "app-bundle"
+      }
     }
   },
   "submit": {
