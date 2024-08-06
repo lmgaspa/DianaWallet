@@ -1,0 +1,11 @@
+node_modules
+.git
+coverage
+android/.gradle
+android/app/build
+ios/Pods
+ios/build
+.DS_Store
+.expo
+.expo-shared
+.vscode
