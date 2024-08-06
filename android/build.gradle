@@ -7,7 +7,6 @@ buildscript {
         compileSdkVersion = Integer.parseInt(findProperty('android.compileSdkVersion') ?: '34')
         targetSdkVersion = Integer.parseInt(findProperty('android.targetSdkVersion') ?: '34')
         kotlinVersion = findProperty('android.kotlinVersion') ?: '1.9.23'
-
         ndkVersion = "26.1.10909125"
     }
     repositories {
@@ -37,5 +36,26 @@ allprojects {
         google()
         mavenCentral()
         maven { url 'https://www.jitpack.io' }
+    }
+}
+
+subprojects {
+    afterEvaluate { project ->
+        if (project.hasProperty("android")) {
+            android {
+                compileOptions {
+                    sourceCompatibility JavaVersion.VERSION_11
+                    targetCompatibility JavaVersion.VERSION_11
+                }
+                kotlinOptions {
+                    jvmTarget = '11'
+                }
+                java {
+                    toolchain {
+                        languageVersion = JavaLanguageVersion.of(11)
+                    }
+                }
+            }
+        }
     }
 }

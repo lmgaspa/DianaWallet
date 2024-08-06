@@ -10,9 +10,18 @@
     "preview": {
       "distribution": "internal"
     },
-    "production": {}
+    "production": {
+      "android": {
+        "workflow": "managed",
+        "buildType": "apk"
+      }
+    }
   },
   "submit": {
     "production": {}
+  },
+  "environment": {
+    "ANDROID_SDK_ROOT": "/path/to/your/android/sdk",
+    "JAVA_HOME": "/path/to/your/java/jdk"
   }
 }
