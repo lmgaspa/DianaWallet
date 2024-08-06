@@ -1,28 +1,19 @@
-image: node:14
-
 stages:
-  - install
-  - build
+  - setup
   - test
 
-before_script:
-  - npm install -g expo-cli
-  - expo --version
-
-install:
-  stage: install
+setup:
+  image: node:latest
+  stage: setup
   script:
     - npm install
-    - ls -la node_modules
-
-build:
-  stage: build
-  script:
-    - echo "Building project"
-    - npm run build
 
 test:
+  image: node:latest
   stage: test
   script:
-    - echo "Running tests"
-    - npm test
+    - npm run test -- --coverage
+  only:
+    - merge_requests
+    - main
+    - develop
