@@ -1,20 +1,35 @@
-stages:
-  - setup
-  - setup
-  - test
+variables:
+  SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar"  # Define o local do cache da tarefa de análise
+  GIT_DEPTH: "0"  # Diz ao git para buscar todos os branches do projeto, necessário pela tarefa de análise
 
 setup:
-  image: node:latest
   stage: setup
+  image: node:latest
   script:
     - npm install
 
 test:
-  image: node:latest
   stage: test
+  image: node:latest
   script:
+    - npm install
     - npm run test -- --coverage
-  only:
-    - merge_requests
-    - main
-    - develop
+  artifacts:
+    paths:
+      - coverage/
+
+sonarcloud-check:
+  stage: sonar
+  image:
+    name: sonarsource/sonar-scanner-cli:latest
+    entrypoint: [""]
+  cache:
+    key: "${CI_JOB_NAME}"
+    paths:
+      - .sonar/cache
+  script:
+    - sonar-scanner
+  rules:
+    - if: '$CI_MERGE_REQUEST_ID'  # Executa em merge requests
+    - if: '$CI_COMMIT_REF_NAME == "main"'  # Executa na branch main
+    - if: '$CI_COMMIT_REF_NAME == "develop"'  # Executa na branch develop
