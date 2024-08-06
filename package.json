@@ -55,7 +55,6 @@
     "typescript": "~5.3.3"
   },
   "devDependencies": {
-    "@babel/preset-react": "^7.23.3",
     "@testing-library/jest-native": "^5.4.3",
     "@testing-library/react-native": "^12.4.3",
     "@types/react-native": "^0.73.0",
