@@ -1,9 +1,9 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import QRCode from 'react-native-qrcode-svg';
 
-export default function DianaDeposit({ }) { // Recebendo o endereço como uma propriedade
+export default function DianaDeposit() { // Recebendo o endereço como uma propriedade
     const route = useRoute();
     const { address } = route.params;
     return (

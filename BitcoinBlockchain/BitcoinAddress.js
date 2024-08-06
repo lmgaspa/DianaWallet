@@ -1,21 +1,11 @@
 import 'react-native-get-random-values'
-import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import React from 'react';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-import { useRoute } from '@react-navigation/native';
-import { Connection, PublicKey } from '@solana/web3.js';
 import BackButton from '../Components/BackButton';
 
 export default function BitcoinAddress({ navigation }) {
-
-    const handleWithdrawPress = () => {
-        navigation.navigate('BitcoinWithdraw', {address});
-    };
-
-    const handleDepositPress = () => {
-        navigation.navigate('BitcoinDeposit', {address});
-    };
 
     const handleBackPress = () => {
         navigation.goBack(); // Função para voltar para a tela anterior

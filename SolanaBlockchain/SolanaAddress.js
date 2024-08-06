@@ -1,13 +1,11 @@
 import 'react-native-get-random-values'
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-
-import { useRoute } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { Connection, PublicKey } from '@solana/web3.js';
 import BackButton from '../Components/BackButton';
 
-export default function SolanaAddress({}) {
+export default function SolanaAddress() {
     const navigation = useNavigation();
     const route = useRoute();
     const [balance, setBalance] = useState(null);
