@@ -4,13 +4,13 @@ stages:
   - scan
 
 setup:
-  image: node:latest
+  image: node:14
   stage: setup
   script:
     - npm install
 
 test:
-  image: node:latest
+  image: node:14
   stage: test
   script:
     - npm run test -- --coverage
