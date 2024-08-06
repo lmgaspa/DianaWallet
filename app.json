@@ -2,7 +2,7 @@
   "expo": {
     "name": "my-wallet",
     "slug": "my-wallet",
-    "version": "4.0.3",
+    "version": "6.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -23,7 +23,7 @@
         "backgroundColor": "#ffffff"
       },
       "package": "com.luizmgba.mywallet",
-      "versionCode": 4
+      "versionCode": 6
     },
     "web": {
       "favicon": "./assets/favicon.png"
