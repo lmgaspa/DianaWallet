@@ -33,7 +33,7 @@ android {
 
     signingConfigs {
         release {
-            storeFile file('upload-key.jks') // Caminho para o seu keystore de upload
+            storeFile file('C:/Users/luhmg/Desktop/FullStack/Mobile/DianaWallet/android/app/upload-key.jks') // Caminho para o seu keystore de upload
             storePassword System.getenv('STORE_PASSWORD') // Use variáveis de ambiente para segurança
             keyAlias 'upload' // Certifique-se de usar o alias correto
             keyPassword System.getenv('KEY_PASSWORD') // Use variáveis de ambiente para segurança
