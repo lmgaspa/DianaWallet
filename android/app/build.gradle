@@ -52,13 +52,13 @@ android {
         }
     }
 
+    ndk {
+        debugSymbolLevel 'SYMBOL_TABLE'
+    }
+
     packagingOptions {
         pickFirst 'META-INF/NOTICE'
         pickFirst 'META-INF/LICENSE'
-    }
-
-    ndk {
-        debugSymbolLevel 'SYMBOL_TABLE'
     }
 }
 
