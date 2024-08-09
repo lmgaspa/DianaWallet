@@ -33,7 +33,7 @@ android {
 
     signingConfigs {
         release {
-            storeFile file('C:/Users/luhmg/Desktop/FullStack/Mobile/DianaWallet/android/app/upload-key.jks') // Caminho para o seu keystore de upload
+            storeFile file('C:/Users/luhmg/Desktop/FullStack/Mobile/DianaWallet/android/app/upload-keystore.jks') // Caminho para o seu keystore de upload
             storePassword System.getenv('STORE_PASSWORD') // Use variáveis de ambiente para segurança
             keyAlias 'upload' // Certifique-se de usar o alias correto
             keyPassword System.getenv('KEY_PASSWORD') // Use variáveis de ambiente para segurança
@@ -55,6 +55,10 @@ android {
     packagingOptions {
         pickFirst 'META-INF/NOTICE'
         pickFirst 'META-INF/LICENSE'
+    }
+
+    ndk {
+        debugSymbolLevel 'SYMBOL_TABLE'
     }
 }
 
