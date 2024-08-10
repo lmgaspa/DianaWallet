@@ -1,24 +1,11 @@
 import 'react-native-get-random-values'
-import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-
-import { useRoute } from '@react-navigation/native';
-import { Connection, PublicKey } from '@solana/web3.js';
+import React from 'react';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import BackButton from '../Components/BackButton';
 
 export default function DianaAddress({ navigation }) {
-
-    const handleWithdrawPress = () => {
-        navigation.navigate('DianaWithdraw', {address});
-    };
-
-    const handleDepositPress = () => {
-        navigation.navigate('DianaDeposit', {address});
-    };
-
     const handleBackPress = () => {
-        navigation.goBack(); // Função para voltar para a tela anterior
+        navigation.goBack();
     };
 
     return (
@@ -38,7 +25,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center', // Alterado para centralizar horizontalmente e verticalmente
+        alignItems: 'center',
         marginTop: 100,
     },
     coinName: {

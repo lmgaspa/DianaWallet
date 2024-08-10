@@ -14,7 +14,7 @@ const Config = ({ navigation }) => {
     };
 
     const handleBackPress = () => {
-        navigation.goBack(); // Function to go back to the previous screen
+        navigation.goBack();
     };
 
     const handleExitPress = async () => {

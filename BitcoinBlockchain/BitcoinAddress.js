@@ -1,7 +1,6 @@
 import 'react-native-get-random-values'
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 
 import BackButton from '../Components/BackButton';
 
@@ -28,7 +27,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center', // Alterado para centralizar horizontalmente e verticalmente
+        alignItems: 'center',
         marginTop: 100,
     },
     coinName: {
