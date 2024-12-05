@@ -1,5 +1,5 @@
 import 'react-native-get-random-values';
-import SolanaWallet from './SolanaBlockchain/SolanaWallet';
+import SolanaWallet from './components/SolanaBlockchain/SolanaWallet';
 
 const Bip39CreateWallet = () => {
   SolanaWallet();

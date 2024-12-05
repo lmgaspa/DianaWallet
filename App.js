@@ -7,19 +7,17 @@ import { NavigationContainer } from '@react-navigation/native';
 import Home from './Home';
 import Splash from './Splash';
 import ImportWallet from './ImportWallet';
-import Balance from './Components/Balance'
-import BalanceofCoins from './Components/BalanceofCoins';
-import Portfolio from './Components/Portfolio';
-import Access from './Components/Access';
-import CryptoTracker from './CryptoTracker/CryptoTracker';
-import BitcoinAddress from './BitcoinBlockchain/BitcoinAddress'
+import Balance from './components/Balance';
+import BalanceOfCoins from './components/BalanceOfCoins';
+import Portfolio from './components/Portfolio';
+import Access from './components/Access';
+import CryptoTracker from './components/CryptoTracker/CryptoTracker';
 import Bip39CreateWallet from './Bip39CreateWallet';
-import SolanaAddress from './SolanaBlockchain/SolanaAddress';
-import DianaAddress from './DianaBlockchain/DianaAddress';
-import SolanaDeposit from './SolanaBlockchain/SolanaDeposit';
-import SolanaWithdraw from './SolanaBlockchain/SolanaWithdraw';
+import SolanaAddress from './components/SolanaBlockchain/SolanaAddress';
+import SolanaDeposit from './components/SolanaBlockchain/SolanaDeposit';
+import SolanaWithdraw from './components/SolanaBlockchain/SolanaWithdraw';
 import PasswordView from './PasswordView';
-import PrivacyPolicy from './Components/PrivacyPolicy';
+import PrivacyPolicy from './components/PrivacyPolicy';
 import Config from './Config';
 
 import { Buffer } from "buffer";
@@ -36,14 +34,12 @@ export default function App() {
         <Stack.Screen name="ImportWallet" component={ImportWallet} />
         <Stack.Screen name="Access" component={Access} />
         <Stack.Screen name="Balance" component={Balance} />
-        <Stack.Screen name="BitcoinAddress" component={BitcoinAddress} />
         <Stack.Screen name="Bip39CreateWallet" component={Bip39CreateWallet} />
         <Stack.Screen name="SolanaAddress" component={SolanaAddress} />
-        <Stack.Screen name="DianaAddress" component={DianaAddress} />
         <Stack.Screen name="SolanaDeposit" component={SolanaDeposit} />
         <Stack.Screen name="SolanaWithdraw" component={SolanaWithdraw} />
         <Stack.Screen name="Portfolio" component={Portfolio} />
-        <Stack.Screen name="BalanceofCoins" component={BalanceofCoins} />
+        <Stack.Screen name="BalanceOfCoins" component={BalanceOfCoins} />
         <Stack.Screen name="CryptoTracker" component={CryptoTracker} />
         <Stack.Screen name="PasswordView" component={PasswordView} />
         <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicy} />

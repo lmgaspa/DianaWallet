@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import { Keypair } from "@solana/web3.js";
 import * as bip39 from "bip39";
-import BackButton from './Components/BackButton';
+import BackButton from './components/BackButton';
 
 const ImportWallet = ({ navigation }) => {
   const [secretPhrase, setSecretPhrase] = useState(Array(12).fill(''));
@@ -116,113 +116,3 @@ const styles = StyleSheet.create({
 });
 
 export default ImportWallet;
-
-
-/*
-
-
-
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-
-export default function ImportWallet() {
-  const navigation = useNavigation();
-  const [validationError, setValidationError] = useState(false);
-  const [secretPhrase, setSecretPhrase] = useState(Array(12).fill('')); // State to store secret phrase
-
-  const handleValidation = () => {
-    // Perform validation here (for demonstration purposes, assuming validation fails)
-    const walletAddress = validateSecretPhrase(secretPhrase);
-    if (walletAddress) {
-      navigation.navigate('Access', { address: walletAddress });
-    } else {
-      setValidationError(true);
-    }
-  };
-
-  // Function to validate secret phrase and return wallet address if valid
-  const validateSecretPhrase = (phraseArray) => {
-    // Perform your validation logic here
-    // For demonstration purposes, let's assume any non-empty phrase is valid and return a dummy address
-    const isValid = phraseArray.some(word => word.trim() === '');
-    if (!isValid) {
-      // Dummy wallet address for demonstration
-      return 'dummyWalletAddress';
-    }
-    return null;
-  };
-
-  const handleChangeText = (text, index) => {
-    const newPhrase = [...secretPhrase];
-    newPhrase[index] = text;
-    setSecretPhrase(newPhrase);
-  };
-
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>RESTORE WALLET</Text>
-      <Text style={styles.text}>Type your secret phrase to restore your existing wallet</Text>
-      {secretPhrase.map((word, index) => (
-        <TextInput
-          key={index.toString()}
-          style={styles.input}
-          placeholder={`Word ${index + 1}`}
-          placeholderTextColor="#FFFFFF80"
-          onChangeText={(text) => handleChangeText(text, index)}
-        />
-      ))}
-      {validationError && (
-        <Text style={styles.errorText}>The key is wrong</Text>
-      )}
-      <TouchableOpacity style={styles.button} onPress={handleValidation}>
-        <Text style={styles.buttonText}>Validate</Text>
-      </TouchableOpacity>
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#000000',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  title: {
-    color: '#FFFFFF',
-    fontSize: 24,
-    marginBottom: 10,
-  },
-  text: {
-    color: '#FFFFFF',
-    textAlign: 'center',
-    marginBottom: 20,
-  },
-  input: {
-    backgroundColor: '#333333',
-    width: '80%',
-    height: 40,
-    marginBottom: 10,
-    color: '#FFFFFF',
-    paddingHorizontal: 10,
-    borderRadius: 5,
-  },
-  button: {
-    backgroundColor: 'blue',
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 5,
-    marginTop: 20,
-  },
-  buttonText: {
-    color: '#FFFFFF',
-    fontSize: 16,
-  },
-  errorText: {
-    color: 'red',
-    marginTop: 10,
-  },
-});
-
-*/

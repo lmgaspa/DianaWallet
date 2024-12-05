@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import BackButton from './Components/BackButton';
+import BackButton from './components/BackButton';
 
 const Config = ({ navigation }) => {
 

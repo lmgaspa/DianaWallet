@@ -11,10 +11,10 @@ export default function Splash() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Espera 4 segundos na tela de splash
+    
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 4000); // 4 seconds
+    }, 4000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -49,8 +49,8 @@ export default function Splash() {
     const keypair = Keypair.generate();
     const generatedAddress = keypair.publicKey.toString();
 
-    console.log('Solana Address: ' + generatedAddress); // Log generated address
-    console.log('Solana Seed: ' + seed); // Log seed
+    console.log('Solana Address: ' + generatedAddress);
+    console.log('Solana Seed: ' + seed);
 
     await saveDataLocally(generatedAddress, mnemonic);
     navigateToAccessPage(generatedAddress, mnemonic);
@@ -67,13 +67,13 @@ export default function Splash() {
   };
 
   const navigateToAccessPage = (address, mnemonic) => {
-    console.log('Navegando para Access com Address:', address); // Log para verificar a navegação
-    console.log('Navegando para Access com Mnemonic:', mnemonic); // Log para verificar a navegação
+    console.log('Navegando para Access com Address:', address);
+    console.log('Navegando para Access com Mnemonic:', mnemonic);
     navigation.navigate('Access', { address, mnemonic });
   };
 
   const navigateToHomePage = () => {
-    console.log('Navegando para Home'); // Log para verificar a navegação
+    console.log('Navegando para Home');
     navigation.navigate('Home');
   };
 

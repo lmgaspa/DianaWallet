@@ -2,35 +2,29 @@
   "expo": {
     "name": "my-wallet",
     "slug": "my-wallet",
-    "version": "6.0.0",
+    "version": "7.0.1",
+    "jsEngine": "hermes",
+    "entryPoint": "./index.js",
+    "runtimeVersion": "7.0.1",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/images/dia.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
     "assetBundlePatterns": [
       "**/*"
     ],
-    "ios": {
-      "supportsTablet": true
+    "web": {
+      "favicon": "./assets/images/favicon.png"
     },
     "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      },
-      "package": "com.luizmgba.mywallet",
-      "versionCode": 6
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
+      "package": "com.luizmgba.mywallet"
     },
     "extra": {
       "eas": {
-        "projectId": "40ce6750-9e09-423a-8376-60e5e13152b8"
+        "projectId": "7eee51e4-889c-48ac-a0ba-58ecabf10f7a"
       }
     }
   }

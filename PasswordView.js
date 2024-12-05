@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import BackButton from './Components/BackButton';
+import BackButton from './components/BackButton';
 
 const PasswordView = ({ navigation }) => {
   const handleBackPress = () => {
-    navigation.goBack(); // Função para voltar para a tela anterior
+    navigation.goBack();
 };
 
   const [mnemonic, setMnemonic] = useState('');
