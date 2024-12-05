@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, ScrollView, StyleSheet } from 'react-native'
 
 export default function Portfolio({ balance }) {
@@ -9,8 +9,8 @@ export default function Portfolio({ balance }) {
             setShowHaveCoins(true);
         }, 3000);
 
-        return () => clearTimeout(timeout);
-    }, []);
+        return () => clearTimeout(timeout); // Cleanup the timeout to avoid memory leaks
+    }, []); // Run only once when the component mounts
 
     return (
         <ScrollView>
@@ -54,3 +54,6 @@ const styles = StyleSheet.create({
         fontSize: 18,
     },
 });
+
+/* <MaterialCommunityIcons name="lock" size={38} color="white" />
+*/

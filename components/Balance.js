@@ -1,5 +1,5 @@
 import 'react-native-get-random-values';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
 import { useRoute, useNavigation } from '@react-navigation/native';
 import { Connection, PublicKey } from '@solana/web3.js';

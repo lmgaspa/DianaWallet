@@ -1,9 +1,11 @@
 import 'react-native-get-random-values';
-import React from "react";
-import { View, ScrollView, StyleSheet } from 'react-native'
-import CryptoTracker from "./CryptoTracker/CryptoTracker";
+import React, { useState, useEffect } from "react";
+import { View, Text, ScrollView, StyleSheet } from 'react-native'
+import Portfolio from "./Portfolio";
+import CryptoTracker from "../CryptoTracker/CryptoTracker";
 import Balance from "./Balance";
-import BalanceofCoins from "./BalanceOfCoins";
+import FooterBar from './FooterBar'
+import BalanceofCoins from "./BalanceofCoins";
 
 export default function Access({ route }) {
     const { address } = route.params;

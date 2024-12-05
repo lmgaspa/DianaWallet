@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, Text, ScrollView, StyleSheet, Linking } from 'react-native';
-import BackButton from '../components/BackButton';
+import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Linking } from 'react-native';
+import BackButton from '../Components/BackButton';
 
 const PrivacyPolicy = ({ navigation }) => {
     const handleBackPress = () => {
